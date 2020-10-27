@@ -29,25 +29,16 @@ const Login = (props) => {
   const sendData = (data) => {
     setLoading(true);
     Axios
-    .post("https://safinapp.sertek-it.space/api/auth/login", data)
+    .post("http://localhost:8000/api/auth/login", data)
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem("token", res.data.access_token);
-          Axios
-            .get("https://safinapp.sertek-it.space/api/auth/user")
-            .then((res) => {
-              if (res.data.plan === "PERSONAL") {
-                setLoading(false);
-                props.history.push("/");
-              } else if (res.data.plan === "FAMILIAR") {
-                setLoading(false);
-                props.history.push("/");
-              }
-            });
+          props.history.push("/");
         }
       })
-      .catch(() => {
+      .catch((err) => {
         /*toastr.error("Usuario o Contraseña incorrecta");*/
+        console.log(err);
         setLoading(false);
       });
   };

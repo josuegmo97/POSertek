@@ -8,8 +8,22 @@ import {
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import Axios from "axios"
+import { deleteToken } from "../utils/Auth";
+import { useHistory } from "react-router-dom";
 
 const TheHeaderDropdown = () => {
+  let history = useHistory();
+  const logout = () => {
+    Axios.get("http://localhost:8000/api/auth/logout")
+      .then((res) => {
+        if (res.status === 200) {
+          deleteToken();
+          history.push("/");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <CDropdown
       inNav
@@ -80,9 +94,9 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" /> 
-          Lock Account
+        <CDropdownItem onClick={logout}>
+          <CIcon name="cil-account-logout" className="mfe-2" /> 
+          Salir
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
