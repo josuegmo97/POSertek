@@ -27,3 +27,15 @@ Route::group([
         Route::get('user', 'AuthController@user');
     });
 });
+
+Route::group([
+    'prefix' => 'categoria'
+], function () {
+    Route::group([
+        'middleware' => 'auth:api'
+      ], function() {
+          Route::get('index', 'CategoriaController@index');
+          Route::post('create', 'CategoriaController@store');
+          Route::post('update', 'CategoriaController@update');
+      });
+});
