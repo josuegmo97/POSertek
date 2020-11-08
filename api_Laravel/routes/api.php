@@ -39,3 +39,15 @@ Route::group([
           Route::post('update', 'CategoriaController@update');
       });
 });
+
+Route::group([
+    'prefix' => 'marca'
+], function () {
+    Route::group([
+        'middleware' => 'auth:api'
+      ], function() {
+          Route::get('index', 'MarcaController@index');
+          Route::post('create', 'MarcaController@store');
+          Route::post('update', 'MarcaController@update');
+      });
+});
