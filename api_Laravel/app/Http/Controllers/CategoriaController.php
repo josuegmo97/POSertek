@@ -108,9 +108,9 @@ class CategoriaController extends Controller
             }else{
                 return response()->json(
                     [
-                        'code' => '1002',
+                        'code' => '1003',
                         //'data' => $data,
-                        'error' => 'La Categoria solicitada no Existe'
+                        'info' => 'La data solicitada no Existe'
                     ]
                 );
             }

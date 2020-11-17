@@ -51,3 +51,15 @@ Route::group([
           Route::post('update', 'MarcaController@update');
       });
 });
+
+Route::group([
+    'prefix' => 'variaciones'
+], function () {
+    Route::group([
+        'middleware' => 'auth:api'
+      ], function() {
+          Route::get('index', 'VariacionesController@index');
+          Route::post('create', 'VariacionesController@store');
+          Route::post('update', 'VariacionesController@update');
+      });
+});

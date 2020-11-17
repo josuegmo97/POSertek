@@ -93,7 +93,7 @@ class MarcaController extends Controller
                     [
                         'code' => '1003',
                         //'data' => $data,
-                        'error' => 'La Marca solicitada no Existe'
+                        'info' => 'La data solicitada no Existe'
                     ]
                 );
             }
