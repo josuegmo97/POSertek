@@ -1,0 +1,407 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Documentacion de API para POS_SERTEK</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li>API POS_SERTEK</li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Bienvenido a la Documentacion de API para POS_SERTEK.</p>
+<!-- END_INFO -->
+<h1>general</h1>
+
+
+<!-- CREACION DE USUARIO -->
+<h2>Creación de Usuario</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/auth/signup</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre del usuario.</td>
+        </tr>
+        <tr>
+            <td><code>email</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Email del usuario.</td>
+        </tr>
+        <tr>
+            <td><code>password</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Contraseña del usuario.</td>
+        </tr>
+        <tr>
+            <td><code>password_confirmation</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Confirmacion de contraseña del usuario.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN CREACION DE USUARIO -->
+
+<!-- LOGIN DE USUARIO -->
+<h2>Login de Usuario</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/auth/login</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>email</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Email del usuario.</td>
+        </tr>
+        <tr>
+            <td><code>password</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Contraseña del usuario.</td>
+        </tr>
+        <tr>
+            <td><code>remember_me</code></td>
+            <td>boolean</td>
+            <td>required</td>
+            <td>Permite permanecer conectado por mas tiempo hasta cerrar la sesion.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN LOGIN DE USUARIO -->
+
+<!-- USUARIO AUTENTICADO -->
+<h2>Usuario Autenticado</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/auth/user</code></p>
+
+<h4>En esta URL puedes ver la informacion del usuario autenticado</h4>
+<!-- USUARIO AUTENTICADO -->
+
+<!-- LOGOUT USUARIO AUTENTICADO -->
+<h2>Logout de Usuario Autenticado</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/auth/logout</code></p>
+
+<h4>En esta URL puedes deslogear al usuario autenticado</h4>
+<!-- LOGOUT USUARIO AUTENTICADO -->
+
+<!-- INDEX CATEGORIA -->
+<h2>Index de Categoria</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/categoria/index</code></p>
+
+<h4>En esta URL puedes verificar todas las categorias existentes</h4>
+<!-- FIN INDEX CATEGORIA -->
+
+<!-- CREACION CATEGORIAS -->
+<h2>Creacion de Categoria</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/categoria/create</code></p>
+
+<h4>Parametros de Entrada</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Parametro</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>categoria</code></td>
+                <td>string</td>
+                <td>required</td>
+                <td>Nombre de la Categoria.</td>
+            </tr>
+            <tr>
+                <td><code>cod_categoria</code></td>
+                <td>string</td>
+                <td>required</td>
+                <td>Codigo de Categoria.</td>
+            </tr>
+            <tr>
+                <td><code>descripcion</code></td>
+                <td>string</td>
+                <td>optional</td>
+                <td>Descripcion de la Categoria.</td>
+            </tr>
+            <tr>
+                <td><code>sub_categoria</code></td>
+                <td>boolean</td>
+                <td>required</td>
+                <td>Indica si esta es una Sub categoria.</td>
+            </tr>
+            <tr>
+                <td><code>cat_principal</code></td>
+                <td>integer</td>
+                <td>optional</td>
+                <td>Indica cual es la categoria principal.</td>
+            </tr>
+        </tbody>
+    </table>
+<!-- FIN CREACION CATEGORIAS -->
+
+<!-- UPDATE CATEGORIAS -->
+<h2>Modificacion de Categoria</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/categoria/update</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_categoria</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>ID de la Categoria que desea editar.</td>
+        </tr>
+        <tr>
+            <td><code>categoria</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre de la Categoria.</td>
+        </tr>
+        <tr>
+            <td><code>cod_categoria</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Codigo de Categoria.</td>
+        </tr>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>string</td>
+            <td>optional</td>
+            <td>Descripcion de la Categoria.</td>
+        </tr>
+        <tr>
+            <td><code>sub_categoria</code></td>
+            <td>boolean</td>
+            <td>required</td>
+            <td>Indica si esta es una Sub categoria.</td>
+        </tr>
+        <tr>
+            <td><code>cat_principal</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica cual es la categoria principal.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN UPDATE CATEGORIAS -->
+
+<!-- INDEX MARCA -->
+<h2>Index de Marca</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/marca/index</code></p>
+
+<h4>En esta URL puedes verificar todas las marcas existentes</h4>
+<!-- FIN INDEX MARCA -->
+
+<!-- CREACION MARCAS -->
+<h2>Creacion de Marca</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/marca/create</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>marca</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre de la Marca.</td>
+        </tr>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>string</td>
+            <td>optional</td>
+            <td>Descripcion de la Marca.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN CREACION MARCAS -->
+
+<!-- UPDATE MARCAS -->
+<h2>Modificacion de Marca</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/marca/update</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_marca</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>ID de la Marca que desea editar.</td>
+        </tr>
+        <tr>
+            <td><code>marca</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre de la Marca.</td>
+        </tr>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>string</td>
+            <td>optional</td>
+            <td>Descripcion de la Marca.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN UPDATE MARCAS -->
+
+<!-- INDEX VARIACIONES -->
+<h2>Index de Variaciones</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/variaciones/index</code></p>
+
+<h4>En esta URL puedes verificar todas las variaciones existentes</h4>
+<!-- FIN INDEX VARIACIONES -->
+
+<!-- CREACION VARIACIONES -->
+<h2>Creacion de Variaciones</h2>
+<blockquote>
+    <p>Ejemplo de Request:</p>
+</blockquote>
+<pre>
+    <code>
+        {
+            "descripcion": "Colores",
+            "valores": ["Azul","Rojo","Verde"]
+        }
+    </code>
+    </pre>
+<h3>HTTP Request</h3>
+<p><code>[POST] api/variaciones/create</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Descripcion de la Variacion.</td>
+        </tr>
+        <tr>
+            <td><code>valores</code></td>
+            <td>array</td>
+            <td>required</td>
+            <td>Array con todas las variaciones existentes.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN CREACION VARIACIONES -->
+
+      </div>
+  </body>
+</html>
