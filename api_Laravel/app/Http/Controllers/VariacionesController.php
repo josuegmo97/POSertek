@@ -106,17 +106,6 @@ class VariacionesController extends Controller
         );
     }
 
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -125,19 +114,43 @@ class VariacionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $variacion = Variaciones::find($request->id_variacion);
+        $variacion->descripcion = $request->descripcion;
+
+        if ($variacion->save()) {
+                if($request->valores && count($request->valores)>0){
+                    foreach ($request->valores as $value) {
+                        $valores =ValorVariaciones::find($value['id']);
+                        $valores->descripcion = $value['descripcion'];
+                        $valores->save();
+                    }
+                    if ($valores->save()) {
+                        return response()->json(
+                            [
+                                'code' => '1000',
+                                //'data' => $data,
+                                'message' => 'Ha sido editado satisfactoriamente'
+                            ]
+                        );
+                    }
+                }
+                return response()->json(
+                    [
+                        'code' => '1001',
+                        //'data' => $data,
+                        'error' => 'Algo ha ocurrido'
+                    ]
+                );
+            }
+        return response()->json(
+            [
+                'code' => '1001',
+                //'data' => $data,
+                'error' => 'Algo ha ocurrido'
+            ]
+        );
     }
 }

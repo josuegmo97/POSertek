@@ -402,6 +402,81 @@
 </table>
 <!-- FIN CREACION VARIACIONES -->
 
+<!-- UPDATE VARIACIONES -->
+<h2>Edicion de Variaciones</h2>
+<blockquote>
+    <p>Ejemplo de Request:</p>
+</blockquote>
+<pre>
+    <code>
+        {
+            "id": 1,
+            "descripcion": "Color",
+            "valores": [
+                {
+                    "id": 1,
+                    "descripcion": "Azul"
+                },
+                {
+                    "id": 2,
+                    "descripcion": "Rojo"
+                },
+                {
+                    "id": 3,
+                    "descripcion": "Verde"
+                }
+            ]
+        }
+    </code>
+    </pre>
+<h3>HTTP Request</h3>
+<p><code>[POST] api/variaciones/create</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID de la Variacion.</td>
+        </tr>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Descripcion de la Variacion.</td>
+        </tr>
+        <tr>
+            <td><code>valores</code></td>
+            <td>array</td>
+            <td>required</td>
+            <td>Array con todas las variaciones existentes.</td>
+        </tr>
+        <tr>
+            <td><code>valores.id</code></td>
+            <td>array</td>
+            <td>required</td>
+            <td>ID dentro del Array de Valores.</td>
+        </tr>
+        <tr>
+            <td><code>valores.descripcion</code></td>
+            <td>array</td>
+            <td>required</td>
+            <td>Descripcion dentro del Array de Valores.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN UPDATE VARIACIONES -->
+
       </div>
   </body>
 </html>
