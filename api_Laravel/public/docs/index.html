@@ -477,6 +477,135 @@
 </table>
 <!-- FIN UPDATE VARIACIONES -->
 
+<!-- INDEX UNIDADES -->
+<h2>Index de Unidades</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/unidades/index</code></p>
+
+<h4>En esta URL puedes verificar todas las unidades existentes</h4>
+<!-- FIN INDEX UNIDADES -->
+
+<!-- CREACION UNIDADES -->
+<h2>Creacion de Unidades</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/unidades/create</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>nombre</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre de las Unidades.</td>
+        </tr>
+        <tr>
+            <td><code>nombre_corto</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre Corto de la Unidad.</td>
+        </tr>
+        <tr>
+            <td><code>decimal</code></td>
+            <td>boolean</td>
+            <td>required</td>
+            <td>Indica si permite decimal.</td>
+        </tr>
+        <tr>
+            <td><code>sub_unidad</code></td>
+            <td>boolean</td>
+            <td>required</td>
+            <td>Indica si esta es una Sub unidad.</td>
+        </tr>
+        <tr>
+            <td><code>equivalencia</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la cantidad que equivale la unidad principal.</td>
+        </tr>
+        <tr>
+            <td><code>unid_principal</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica cual es el ID de la unidad principal.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN CREACION UNIDADES -->
+
+<!-- UPDATE UNIDADES -->
+<h2>Edicion de Unidades</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/unidades/update</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_unidad</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID de la Unidad.</td>
+        </tr>
+        <tr>
+            <td><code>nombre</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre de las Unidades.</td>
+        </tr>
+        <tr>
+            <td><code>nombre_corto</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre Corto de la Unidad.</td>
+        </tr>
+        <tr>
+            <td><code>decimal</code></td>
+            <td>boolean</td>
+            <td>required</td>
+            <td>Indica si permite decimal.</td>
+        </tr>
+        <tr>
+            <td><code>sub_unidad</code></td>
+            <td>boolean</td>
+            <td>required</td>
+            <td>Indica si esta es una Sub unidad.</td>
+        </tr>
+        <tr>
+            <td><code>equivalencia</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la cantidad que equivale la unidad principal.</td>
+        </tr>
+        <tr>
+            <td><code>unid_principal</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica cual es el ID de la unidad principal.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN UPDATE UNIDADES -->
+
       </div>
   </body>
 </html>

@@ -63,3 +63,15 @@ Route::group([
           Route::post('update', 'VariacionesController@update');
       });
 });
+
+Route::group([
+    'prefix' => 'unidades'
+], function () {
+    Route::group([
+        'middleware' => 'auth:api'
+      ], function() {
+          Route::get('index', 'UnidadesController@index');
+          Route::post('create', 'UnidadesController@store');
+          Route::post('update', 'UnidadesController@update');
+      });
+});
