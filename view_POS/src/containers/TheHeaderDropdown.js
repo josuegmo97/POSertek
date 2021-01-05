@@ -11,6 +11,7 @@ import CIcon from '@coreui/icons-react'
 import Axios from "axios"
 import { deleteToken } from "../utils/Auth";
 import { useHistory } from "react-router-dom";
+import  {freeSet}  from '@coreui/icons'
 
 const TheHeaderDropdown = () => {
   let history = useHistory();
@@ -95,7 +96,7 @@ const TheHeaderDropdown = () => {
         </CDropdownItem>
         <CDropdownItem divider />
         <CDropdownItem onClick={logout}>
-          <CIcon name="cil-account-logout" className="mfe-2" /> 
+          <CIcon content={freeSet.cilAccountLogout} className="mfe-2" /> 
           Salir
         </CDropdownItem>
       </CDropdownMenu>

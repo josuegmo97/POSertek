@@ -32,6 +32,30 @@ export default [
     _tag: 'CSidebarNavTitle',
     _children: ['Components']
   },
+  /** Productos */
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Productos',
+    route: '/productos',
+    icon: ' cil-applications',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Marcas',
+        to: '/productos/marcas',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Categoria',
+        to: '/productos/categorias',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'CoreUI Brands',
+        to: '/icons/brands',
+      },
+    ],
+  },
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Base',
