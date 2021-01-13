@@ -75,3 +75,16 @@ Route::group([
           Route::post('update', 'UnidadesController@update');
       });
 });
+
+Route::group([
+    'prefix' => 'productos'
+], function () {
+    Route::group([
+        'middleware' => 'auth:api'
+      ], function() {
+          Route::get('index', 'ProductosController@index');
+          Route::post('create', 'ProductosController@store');
+          Route::post('update', 'ProductosController@update');
+          Route::post('stock', 'ProductosController@stock');
+      });
+});

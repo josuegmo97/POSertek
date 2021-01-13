@@ -14,7 +14,7 @@ class UnidadesController extends Controller
      */
     public function index()
         {
-        //$data =[];
+        $data =[];
         $unidades = Unidades::all();
 
         foreach ($unidades as $value) {

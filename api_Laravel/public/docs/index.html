@@ -606,6 +606,282 @@
 </table>
 <!-- FIN UPDATE UNIDADES -->
 
+<!-- INDEX PRODUCTOS -->
+<h2>Index de Productos</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/productos/index</code></p>
+
+<h4>En esta URL puedes verificar todos los productos existentes</h4>
+<!-- FIN INDEX PRODUCTOS -->
+
+<!-- CREACION PRODUCTOS -->
+<h2>Creacion de Productos</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/productos/create</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>nombre</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>sku</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>SKU del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>tipo_codigo</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Tipo de código de barras.</td>
+        </tr>
+        <tr>
+            <td><code>unidad_id</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>Indica la unidad del producto.</td>
+        </tr>
+        <tr>
+            <td><code>marca_id</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la marca del producto.</td>
+        </tr>
+        <tr>
+            <td><code>categoria_id</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la categoria del producto.</td>
+        </tr>
+        <tr>
+            <td><code>subcategoria_id</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la categoria del producto.</td>
+        </tr>
+        <tr>
+            <td><code>cantidad_alerta</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la cantidad de productos restante para la alerta.</td>
+        </tr>
+        <tr>
+            <td><code>imagen</code></td>
+            <td>longtext</td>
+            <td>optional</td>
+            <td>Código base64 de la imagen.</td>
+        </tr>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>text</td>
+            <td>optional</td>
+            <td>Descripción del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>vender</code></td>
+            <td>boolean</td>
+            <td>optional</td>
+            <td>Indica si el producto sera puesto en la tienda.</td>
+        </tr>
+        <tr>
+            <td><code>impuesto_noincluido</code></td>
+            <td>decimal</td>
+            <td>required</td>
+            <td>Impuesto no incluido del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>impuesto_incluido</code></td>
+            <td>decimal</td>
+            <td>required</td>
+            <td>Impuesto incluido del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>margen</code></td>
+            <td>decimal</td>
+            <td>optional</td>
+            <td>Margen de porcentaje.</td>
+        </tr>
+        <tr>
+            <td><code>excluyendo_impuesto</code></td>
+            <td>decimal</td>
+            <td>optional</td>
+            <td>Excluyendo Impuestos.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN CREACION PRODUCTOS -->
+
+<!-- UPDATE PRODUCTOS -->
+<h2>Edicion de Productos</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/productos/update</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_producto</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID del Producto a editar.</td>
+        </tr>
+        <tr>
+            <td><code>nombre</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Nombre del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>sku</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>SKU del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>tipo_codigo</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>Tipo de código de barras.</td>
+        </tr>
+        <tr>
+            <td><code>unidad_id</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>Indica la unidad del producto.</td>
+        </tr>
+        <tr>
+            <td><code>marca_id</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la marca del producto.</td>
+        </tr>
+        <tr>
+            <td><code>categoria_id</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la categoria del producto.</td>
+        </tr>
+        <tr>
+            <td><code>subcategoria_id</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la categoria del producto.</td>
+        </tr>
+        <tr>
+            <td><code>cantidad_alerta</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Indica la cantidad de productos restante para la alerta.</td>
+        </tr>
+        <tr>
+            <td><code>imagen</code></td>
+            <td>longtext</td>
+            <td>optional</td>
+            <td>Código base64 de la imagen.</td>
+        </tr>
+        <tr>
+            <td><code>descripcion</code></td>
+            <td>text</td>
+            <td>optional</td>
+            <td>Descripción del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>vender</code></td>
+            <td>boolean</td>
+            <td>optional</td>
+            <td>Indica si el producto sera puesto en la tienda.</td>
+        </tr>
+        <tr>
+            <td><code>impuesto_noincluido</code></td>
+            <td>decimal</td>
+            <td>required</td>
+            <td>Impuesto no incluido del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>impuesto_incluido</code></td>
+            <td>decimal</td>
+            <td>required</td>
+            <td>Impuesto incluido del Producto.</td>
+        </tr>
+        <tr>
+            <td><code>margen</code></td>
+            <td>decimal</td>
+            <td>optional</td>
+            <td>Margen de porcentaje.</td>
+        </tr>
+        <tr>
+            <td><code>excluyendo_impuesto</code></td>
+            <td>decimal</td>
+            <td>optional</td>
+            <td>Excluyendo Impuestos.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN UPDATE PRODUCTOS -->
+
+<!-- STOCKS PRODUCTOS -->
+<h2>Stock de Productos</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/productos/stock</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_producto</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID del Producto a editar.</td>
+        </tr>
+        <tr>
+            <td><code>cantidad</code></td>
+            <td>integer</td>
+            <td>optional</td>
+            <td>Cantidad de Productos.</td>
+        </tr>
+        <tr>
+            <td><code>costo_unitario</code></td>
+            <td>decimal</td>
+            <td>optional</td>
+            <td>Costo unitario del Producto.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN STOCKS PRODUCTOS -->
+
       </div>
   </body>
 </html>
