@@ -31,9 +31,9 @@ const MainModal = ({
 
   // -------------------USE STATE-------------------
   
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
-  const [units, setUnits] = useState([]);
+  const [categories, setCategories] = useState([{name: 'test'}]);
+  const [brands, setBrands] = useState([{name: 'test'}]);
+  const [units, setUnits] = useState([{name: 'test'}]);
 
   
   // -------------------USE EFFECT-------------------
@@ -41,17 +41,21 @@ const MainModal = ({
   useEffect(() => {
     Axios
     .all([
-      'http://localhost:8000/api/categoria/index',
-      'http://localhost:8000/api/unidad/index',
-      'http://localhost:8000/api/marca/index',
+      Axios.get('http://localhost:8000/api/categoria/index'),
+      Axios.get('http://localhost:8000/api/unidades/index'),
+      Axios.get('http://localhost:8000/api/marca/index'),
     ])
     .then(Axios.spread((...responses) => {
-      setCategories(responses[0]);
-      setUnits(responses[1]);
-      setBrands(responses[2]);
+      setCategories(responses[0].data.data);
+      setUnits(responses[1].data.data);
+      setBrands(responses[2].data.data);
     }))
     .catch(err => {});
   }, [])
+
+  const test = () => {
+    console.log(categories);
+  };
 
   // -------------------FUNCTIONS-------------------
 
@@ -61,6 +65,7 @@ const MainModal = ({
       onClose={onClose}
       color="info"
     >
+      <button onClick={() => test()}>test</button>
       <CModalHeader closeButton>
         <CModalTitle>Agregar Producto</CModalTitle>
       </CModalHeader>
@@ -130,8 +135,8 @@ const MainModal = ({
                 value={productData.unidad_id}
               >
                 <option value="" selected disabled>Seleccione ...</option>
-                {units.forEach((elem, i)=> (
-                  <option value={elem.nombre_corto}>{elem.nombre}({elem.nombre_corto})</option>
+                {units.map((elem, i)=> (
+                  <option key={i} value={elem.nombre_corto}>{elem.nombre}({elem.nombre_corto})</option>
                 ))}
               </CSelect>
               <CFormText>Unidad.</CFormText>
@@ -150,9 +155,9 @@ const MainModal = ({
                 onChange={e => onChange(e)}
                 value={productData.marca_id}
               >
-                <option value="" selected disabled>Seleccione ...</option>
-                {brands.forEach((elem, i)=> (
-                  <option value={elem.marca}>{elem.marca}</option>
+                <option value="" disabled defaultValue>Seleccione ...</option>
+                {brands.map((elem, i)=> (
+                  <option key={i} value={elem.marca}>{elem.marca}</option>
                 ))}
               </CSelect>
               <CFormText>Marca.</CFormText>
@@ -171,12 +176,12 @@ const MainModal = ({
                 onChange={e => onChange(e)}
                 value={productData.categoria_id}
               >
-                <option value="" selected disabled>Seleccione ...</option>
-                {categories.forEach((elem, i)=> (
-                  <option value={elem.categoria}>{elem.categoria}</option>
+                <option value="" disabled defaultValue>Seleccione ...</option>
+                {categories.map((elem, i)=> (
+                  <option key={i} value={elem.categoria}>{elem.categoria}</option>
                 ))}
               </CSelect>
-              <CFormText>Categoria.</CFormText>
+              <CFormText>Categoria</CFormText>
             </CCol>
           </CFormGroup>
 
@@ -192,7 +197,7 @@ const MainModal = ({
                 onChange={e => onChange(e)}
                 value={productData.subcategoria_id}
               >
-                <option value="" selected disabled>Seleccione ...</option>
+                <option value="" disabled defaultValue>Seleccione ...</option>
                 <option value="libra">Subcategoria 11</option>
               </CSelect>
               <CFormText>Subcategoria.</CFormText>
