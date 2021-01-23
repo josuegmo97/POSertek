@@ -37,6 +37,9 @@ const ListarCategorias = () => {
     cat_principal: "",
     sub_categoria: false,
   });
+  const [deleteData, setDeleteData] = useState({
+    id: null,
+  });
   const [modalEditar, setModalEditar] = useState(false);
   const [modalEliminar, setModalEliminar] = useState(false);
   const [modalAgregar, setModalAgregar] = useState(false);
@@ -62,14 +65,13 @@ const ListarCategorias = () => {
   useEffect(() => {
     Axios.get("http://localhost:8000/api/categoria/index")
       .then((res) => {
-        setCategories(res.data.data)
-        let subCat=res.data.data
-        let listSubCat=subCat.filter(d=>d.sub_categoria===0)
-        setPrincipalCategory(listSubCat)
+        setCategories(res.data.data);
+        let subCat = res.data.data;
+        let listSubCat = subCat.filter((d) => d.sub_categoria === 0);
+        setPrincipalCategory(listSubCat);
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   const actions = (
     <CButton shape="pill" color="primary">
@@ -110,7 +112,16 @@ const ListarCategorias = () => {
         >
           Editar
         </CButton>
-        <CButton onClick={() => abrirCerrarModalEliminar()} color="danger">
+        <CButton
+          onClick={() => {
+            setDeleteData({
+              ...deleteData,
+              id:elem.id
+            })
+            abrirCerrarModalEliminar();
+          }}
+          color="danger"
+        >
           Eliminar
         </CButton>
       </CButtonGroup>,
@@ -151,6 +162,33 @@ const ListarCategorias = () => {
       })
       .catch((err) => {});
   };
+  const deleteElem = async (elemId) => {
+    await Axios.post(`http://localhost:8000/api/categoria/delete`, {
+      id: elemId,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          MySwal.fire({
+            title: "Categoria eliminada correctamente",
+            icon: "success",
+            toast: true,
+            showConfirmButton: false,
+            timer: 2000,
+            position: "top-end",
+          });
+          setCategories(categories.filter((arg) => arg.id !== elemId));
+          abrirCerrarModalEliminar()
+        }
+      })
+      .catch((err) => {          MySwal.fire({
+        title: "Error al eliminar la categoria",
+        icon: "error",
+        toast: true,
+        showConfirmButton: false,
+        timer: 2000,
+        position: "top-end",
+      });});
+  };
   const handleOnSubmit = (e) => {
     e.preventDefault();
     sendData(editData);
@@ -159,7 +197,9 @@ const ListarCategorias = () => {
   return (
     <CRow>
       <CCol className="mb-2 mb-xl-0 text-right">
-        <CButton onClick={() => abrirCerrarModalAgregar()} color="info">Agregar</CButton>
+        <CButton onClick={() => abrirCerrarModalAgregar()} color="info">
+          Agregar
+        </CButton>
       </CCol>
       <CCol xs="12" className="mt-2">
         <CCard>
@@ -260,10 +300,10 @@ const ListarCategorias = () => {
                     value={editData.cat_principal}
                   >
                     <option value="">Seleccione una categoria</option>
-                    {principalCategory.map(data=>{
-                      return(
-                      <option value={data.categoria}>{data.categoria}</option>
-                      )
+                    {principalCategory.map((data) => {
+                      return (
+                        <option value={data.categoria}>{data.categoria}</option>
+                      );
                     })}
                   </CSelect>
                 </CCol>
@@ -271,11 +311,14 @@ const ListarCategorias = () => {
             ) : null}
           </CModalBody>
           <CModalFooter>
-            <CButton color="secondary" onClick={() => abrirCerrarModalAgregar()}>
-              Cancel
+            <CButton
+              color="secondary"
+              onClick={() => abrirCerrarModalAgregar()}
+            >
+              Cancelar
             </CButton>
             <CButton type="submit" color="info">
-              Do Something
+              Agregar
             </CButton>{" "}
           </CModalFooter>
         </CForm>
@@ -369,10 +412,12 @@ const ListarCategorias = () => {
                     value={editData.cat_principal}
                   >
                     <option value={"0"}>Seleccione una categoria</option>
-                    {principalCategory.map(data=>{
-                      return(
-                      <option value={parseInt(data.id)}>{data.categoria}</option>
-                      )
+                    {principalCategory.map((data) => {
+                      return (
+                        <option value={parseInt(data.id)}>
+                          {data.categoria}
+                        </option>
+                      );
                     })}
                   </CSelect>
                 </CCol>
@@ -381,10 +426,10 @@ const ListarCategorias = () => {
           </CModalBody>
           <CModalFooter>
             <CButton color="secondary" onClick={() => abrirCerrarModalEditar()}>
-              Cancel
+              Cancelar
             </CButton>
             <CButton type="submit" color="info">
-              Do Something
+              Editar
             </CButton>{" "}
           </CModalFooter>
         </CForm>
@@ -409,9 +454,9 @@ const ListarCategorias = () => {
         </CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => abrirCerrarModalEliminar()}>
-            Cancel
+            Cancelar
           </CButton>
-          <CButton color="info">Do Something</CButton>{" "}
+          <CButton onClick={() => deleteElem(deleteData.id)} color="info">Eliminar</CButton>{" "}
         </CModalFooter>
       </CModal>
     </CRow>
