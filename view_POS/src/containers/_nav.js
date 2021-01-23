@@ -41,18 +41,28 @@ export default [
     _children: [
       {
         _tag: 'CSidebarNavItem',
+        name: 'Lista de productos',
+        to: '/productos',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Categorias',
+        to: '/productos/categorias',
+      },
+      {
+        _tag: 'CSidebarNavItem',
         name: 'Marcas',
         to: '/productos/marcas',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Categoria',
-        to: '/productos/categorias',
+        name: 'Unidades',
+        to: '/productos/unidades',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
+        name: 'Variaciones',
+        to: '/productos/variaciones',
       },
     ],
   },
