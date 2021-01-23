@@ -53,10 +53,6 @@ const MainModal = ({
     .catch(err => {});
   }, [])
 
-  const test = () => {
-    console.log(categories);
-  };
-
   // -------------------FUNCTIONS-------------------
 
   return (
@@ -65,7 +61,6 @@ const MainModal = ({
       onClose={onClose}
       color="info"
     >
-      <button onClick={() => test()}>test</button>
       <CModalHeader closeButton>
         <CModalTitle>Agregar Producto</CModalTitle>
       </CModalHeader>
