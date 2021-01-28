@@ -42,10 +42,10 @@ const ListarCategorias = () => {
   useEffect(() => {
     Axios.get("http://localhost:8000/api/categoria/index")
       .then((res) => {
-        setCategories(res.data.data)
-        let subCat=res.data.data
-        let listSubCat=subCat.filter(d=>d.sub_categoria===0)
-        setPrincipalCategory(listSubCat)
+        setCategories(res.data.data);
+        let subCat = res.data.data;
+        let listSubCat = subCat.filter((d) => d.sub_categoria === 0);
+        setPrincipalCategory(listSubCat);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -76,7 +76,17 @@ const ListarCategorias = () => {
         >
           Editar
         </CButton>
-        <CButton onClick={() => abrirCerrarModalEliminar()} color="danger">
+        <CButton
+          onClick={() => {
+            console.log('delete')
+            // setDeleteData({
+            //   ...deleteData,
+            //   id:elem.id
+            // })
+            abrirCerrarModalEliminar();
+          }}
+          color="danger"
+        >
           Eliminar
         </CButton>
       </CButtonGroup>,
@@ -215,9 +225,12 @@ const ListarCategorias = () => {
         </CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => abrirCerrarModalEliminar()}>
-            Cancel
+            Cancelar
           </CButton>
-          <CButton color="info">Do Something</CButton>{" "}
+          <CButton 
+            // onClick={() => deleteElem(deleteData.id)} 
+            color="info"
+          >Eliminar</CButton>{" "}
         </CModalFooter>
       </CModal>
     </CRow>

@@ -182,7 +182,8 @@ return (
       onChange={handleOnChangeMainModalUnit}
       onSubmit={handleOnSubmitMainModalUnit}
       unitData={unitData}
-      setUnitData={setUnitData}  
+      setUnitData={setUnitData}
+      unitsList={unitsList}  
     />
 
     {/** Modal eliminar */}

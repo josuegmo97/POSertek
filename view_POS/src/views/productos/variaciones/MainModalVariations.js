@@ -61,7 +61,7 @@ const MainModalVariations = ({
                   <CInput
                     key={i}
                     style={{marginBottom: '1em'}}
-                    id=""
+                    id={i}
                     name=""
                     placeholder="Valor"
                     onChange={(e) => onChangeNewValue(e, i)}

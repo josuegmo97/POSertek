@@ -17,6 +17,7 @@ import {
 } from "@coreui/react";
 import MainModalVariations from "./MainModalVariations";
 
+
 const initialVariationData = {
   descripcion: '',
   valores: [],
@@ -33,7 +34,6 @@ const ListarVariaciones = () => {
   const [variationData, setVariationData] = useState(initialVariationData);
   const [modalEliminar, setModalEliminar] = useState(false);
   const [mainModalVariationOpen, setMainModalVariationOpen] = useState(false);
-
 
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
@@ -106,17 +106,21 @@ const ListarVariaciones = () => {
   const handleOnCloseMainModalBrand = () => {
     setMainModalVariationOpen(false);
     setVariationData(initialVariationData);
+    setNewValueList([]);
   };
 
   const handleOnSubmitMainModalBrand = (e) => {
     e.preventDefault();
-    setVariationData({
+    
+    const newState = {
       ...variationData,
-      valores: newValueList,
-    });
+      valores: [...newValueList],
+    };
+
+    console.log(newState);
 
     Axios
-    .post('http://localhost:8000/api/variaciones/create', variationData)
+    .post('http://localhost:8000/api/variaciones/create', newState)
     .then(_ => {
       MySwal.fire({
         title: variationData.id ? "Variacion actualizada correctamente" : "Variacion creada",
@@ -138,7 +142,7 @@ const ListarVariaciones = () => {
       });
     })
 
-    setVariationsList([]);
+    setNewValueList([]);
     setVariationData(initialVariationData);
   };
 
@@ -150,17 +154,14 @@ const ListarVariaciones = () => {
   };
 
   const handleOnBrandNewValue = () => {
-    let newValues = [];
-    newValues.push(initialVariationValueData);
-    setNewValueList([...newValueList, newValues])
+    setNewValueList([...newValueList, initialVariationValueData]);
   };
 
   const handleOnChangeValues = (e, i) => {  
-    newValueList.forEach((elem, index) => {
-      if (index === i) {
-        elem.descripcion = e.target.value;
-      }
-    });
+    let items = [...newValueList];
+    let item = {...items[i], descripcion: e.target.value};
+    items[i] = item;
+    setNewValueList(items);
   };
 
   return (

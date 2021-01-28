@@ -13,6 +13,7 @@ import {
   CInput,
   CFormText,
   CSwitch,
+  CSelect,
 } from "@coreui/react";
 
 const MainModalUnit = ({ 
@@ -22,6 +23,7 @@ const MainModalUnit = ({
   onSubmit, 
   unitData,
   setUnitData,
+  unitsList,
 }) => {
 
   return (
@@ -99,22 +101,39 @@ const MainModalUnit = ({
             </CCol>
           </CFormGroup>
 
-          <CFormGroup row>
-            <CCol md="4">
-              <CLabel htmlFor="equivalencia">Equivalencia</CLabel>
-            </CCol>
-            <CCol xs="12" md="8">
-              <CInput
-                type="number"
-                id="equivalencia"
-                name="equivalencia"
-                placeholder="Equivalencia"
-                onChange={e => onChange(e)}
-                value={unitData.equivalencia}
-              />
-              <CFormText>Equivalencia.</CFormText>
-            </CCol>
-          </CFormGroup>
+          {unitData.sub_unidad ? (
+            <CFormGroup row>
+              <CCol md="4">
+                <CLabel htmlFor="equivalencia">Equivalencia</CLabel>
+                <br/>
+                <CLabel htmlFor="equivalencia">1 { unitData.nombre || 'Unidad' }</CLabel>
+              </CCol>
+              <CCol xs="12" md="4">
+                <CInput
+                  type="number"
+                  id="equivalencia"
+                  name="equivalencia"
+                  placeholder="Equivalencia"
+                  onChange={e => onChange(e)}
+                  value={unitData.equivalencia}
+                />
+                <CFormText>Equivalencia.</CFormText>
+              </CCol>
+              <CCol xs="12" md="4">
+                <CSelect
+                  custom
+                  name="marca"
+                  id="marca"
+                  onChange={e => onChange(e)}
+                >
+                  <option value="" disabled defaultValue>Seleccione ...</option>
+                  {unitsList.map((elem, i)=> (
+                    <option key={i} value={elem.nombre}>{elem.nombre}({elem.nombre_corto})</option>
+                  ))}
+                </CSelect>
+              </CCol>
+            </CFormGroup>
+          ) : null}
 
           <CFormGroup row>
             <CCol md="4">
