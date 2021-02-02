@@ -269,6 +269,33 @@
 </table>
 <!-- FIN UPDATE CATEGORIAS -->
 
+<!-- DELETE CATEGORIAS -->
+<h2>Eliminar Categoria</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/categoria/delete</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_categoria</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>ID de la Categoria que desea eliminar.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN DELETE CATEGORIAS -->
+
 <!-- INDEX MARCA -->
 <h2>Index de Marca</h2>
 
@@ -350,6 +377,33 @@
 </table>
 <!-- FIN UPDATE MARCAS -->
 
+<!-- DELETE MARCAS -->
+<h2>Eliminar Marca</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/marca/delete</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_marca</code></td>
+            <td>string</td>
+            <td>required</td>
+            <td>ID de la Marca que desea eliminar.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN DELETE MARCAS -->
+
 <!-- INDEX VARIACIONES -->
 <h2>Index de Variaciones</h2>
 
@@ -430,7 +484,7 @@
     </code>
     </pre>
 <h3>HTTP Request</h3>
-<p><code>[POST] api/variaciones/create</code></p>
+<p><code>[POST] api/variaciones/update</code></p>
 
 <h4>Parametros de Entrada</h4>
 <table>
@@ -476,6 +530,33 @@
     </tbody>
 </table>
 <!-- FIN UPDATE VARIACIONES -->
+
+<!-- DELETE VARIACIONES -->
+<h2>Eliminar Variaciones</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/variaciones/delete</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID de la Variacion que desea eliminar.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN DELETE VARIACIONES -->
 
 <!-- INDEX UNIDADES -->
 <h2>Index de Unidades</h2>
@@ -605,6 +686,33 @@
     </tbody>
 </table>
 <!-- FIN UPDATE UNIDADES -->
+
+<!-- DELETE UNIDADES -->
+<h2>Eliminar Unidades</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/unidades/delete</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_unidad</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID de la Unidad que desea eliminar.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN DELETE UNIDADES -->
 
 <!-- INDEX PRODUCTOS -->
 <h2>Index de Productos</h2>
@@ -881,6 +989,33 @@
     </tbody>
 </table>
 <!-- FIN STOCKS PRODUCTOS -->
+
+<!-- DELETE PRODUCTOS -->
+<h2>Stock de Productos</h2>
+
+<h3>HTTP Request</h3>
+<p><code>[POST] api/productos/delete</code></p>
+
+<h4>Parametros de Entrada</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Tipo</th>
+            <th>Status</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>id_producto</code></td>
+            <td>integer</td>
+            <td>required</td>
+            <td>ID del Producto que desea eliminar.</td>
+        </tr>
+    </tbody>
+</table>
+<!-- FIN DELETE PRODUCTOS -->
 
       </div>
   </body>

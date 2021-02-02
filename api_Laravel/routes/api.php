@@ -37,6 +37,7 @@ Route::group([
           Route::get('index', 'CategoriaController@index');
           Route::post('create', 'CategoriaController@store');
           Route::post('update', 'CategoriaController@update');
+          Route::post('delete', 'CategoriaController@delete');
       });
 });
 
@@ -49,6 +50,7 @@ Route::group([
           Route::get('index', 'MarcaController@index');
           Route::post('create', 'MarcaController@store');
           Route::post('update', 'MarcaController@update');
+          Route::post('delete', 'MarcaController@delete');
       });
 });
 
@@ -61,6 +63,7 @@ Route::group([
           Route::get('index', 'VariacionesController@index');
           Route::post('create', 'VariacionesController@store');
           Route::post('update', 'VariacionesController@update');
+          Route::post('delete', 'VariacionesController@delete');
       });
 });
 
@@ -73,6 +76,7 @@ Route::group([
           Route::get('index', 'UnidadesController@index');
           Route::post('create', 'UnidadesController@store');
           Route::post('update', 'UnidadesController@update');
+          Route::post('delete', 'UnidadesController@delete');
       });
 });
 
@@ -86,5 +90,6 @@ Route::group([
           Route::post('create', 'ProductosController@store');
           Route::post('update', 'ProductosController@update');
           Route::post('stock', 'ProductosController@stock');
+          Route::post('delete', 'ProductosController@delete');
       });
 });

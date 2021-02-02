@@ -113,8 +113,35 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        //dd($request->all());
+        $marca = Marca::find($request->id_marca);
+            if ($marca) {
+                $marca->delete();
+                return response()->json(
+                    [
+                        'code' => '1000',
+                        //'data' => $data,
+                        'message' => 'Ha sido eliminado satisfactoriamente'
+                    ]
+                );
+            }else{
+                return response()->json(
+                    [
+                        'code' => '1003',
+                        //'data' => $data,
+                        'info' => 'La data solicitada no Existe'
+                    ]
+                );
+            }
+        
+        return response()->json(
+            [
+                'code' => '1001',
+                //'data' => $data,
+                'error' => 'Algo ha ocurrido'
+            ]
+        );
     }
 }
