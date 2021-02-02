@@ -14,52 +14,29 @@ import {
   CModalFooter,
   CModalHeader,
   CModalTitle,
-  CForm,
-  CFormGroup,
-  CLabel,
-  CInput,
-  CTextarea,
-  CFormText,
-  CSwitch,
-  CSelect,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { freeSet } from "@coreui/icons";
+import MainModalCategories from "./MainModalCategories";
+
+const initialCategoryData = {
+  id_categoria: null,
+  categoria: "",
+  cod_categoria: "",
+  descripcion: "",
+  cat_principal: "",
+  sub_categoria: false,
+};
 
 const ListarCategorias = () => {
   const MySwal = withReactContent(Swal);
   const [categories, setCategories] = useState([]);
-  const [editData, setEditData] = useState({
-    id_categoria: null,
-    categoria: "",
-    cod_categoria: "",
-    descripcion: "",
-    cat_principal: "",
-    sub_categoria: false,
-  });
-  const [deleteData, setDeleteData] = useState({
-    id: null,
-  });
-  const [modalEditar, setModalEditar] = useState(false);
+  const [categoryData, setCategoryData] = useState(initialCategoryData);
+  const [mainModalCategoryOpen, setMainModalCategoryOpen] = useState(false);
   const [modalEliminar, setModalEliminar] = useState(false);
-  const [modalAgregar, setModalAgregar] = useState(false);
   const [principalCategory, setPrincipalCategory] = useState([]);
 
-  const abrirCerrarModalEditar = () => {
-    setModalEditar(!modalEditar);
-  };
+
   const abrirCerrarModalEliminar = () => {
     setModalEliminar(!modalEliminar);
-  };
-  const abrirCerrarModalAgregar = () => {
-    setModalAgregar(!modalAgregar);
-  };
-
-  const handleOnChange = (e) => {
-    setEditData({
-      ...editData,
-      [e.target.name]: e.target.value,
-    });
   };
 
   useEffect(() => {
@@ -73,12 +50,6 @@ const ListarCategorias = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const actions = (
-    <CButton shape="pill" color="primary">
-      <CIcon className="mr-2 mb-1" content={freeSet.cilPlus} />
-      Añadir categoria
-    </CButton>
-  );
 
   const columns = [
     "Codigo de categoria",
@@ -87,8 +58,9 @@ const ListarCategorias = () => {
     "Categoria Padre",
     "Acciones",
   ];
+
   let _data = [];
-  categories.map((elem) => {
+  categories.forEach((elem) => {
     _data.push([
       elem.cod_categoria,
       elem.categoria,
@@ -97,16 +69,8 @@ const ListarCategorias = () => {
       <CButtonGroup>
         <CButton
           onClick={() => {
-            setEditData({
-              ...editData,
-              id_categoria: elem.id,
-              categoria: elem.categoria,
-              cod_categoria: elem.cod_categoria,
-              descripcion: elem.descripcion,
-              sub_categoria: elem.sub_categoria !== 0 ? true : false,
-              cat_principal: elem.cat_principal,
-            });
-            abrirCerrarModalEditar();
+            setCategoryData(elem);
+            handleOnOpenMainModalCategory();
           }}
           color="info"
         >
@@ -114,10 +78,11 @@ const ListarCategorias = () => {
         </CButton>
         <CButton
           onClick={() => {
-            setDeleteData({
-              ...deleteData,
-              id:elem.id
-            })
+            console.log('delete')
+            // setDeleteData({
+            //   ...deleteData,
+            //   id:elem.id
+            // })
             abrirCerrarModalEliminar();
           }}
           color="danger"
@@ -136,18 +101,20 @@ const ListarCategorias = () => {
     download: true,
     print: true,
   };
+
   const sendData = (data) => {
-    Axios.post("http://localhost:8000/api/categoria/update", data)
+    if(categoryData.id) {
+      Axios.post("http://localhost:8000/api/categoria/update", data)
       .then((res) => {
         let refreshData = categories;
-        refreshData.map((d) => {
-          if (editData.id_categoria === d.id) {
-            d.id = editData.id;
-            d.categoria = editData.categoria;
-            d.cod_categoria = editData.cod_categoria;
-            d.descripcion = editData.descripcion;
-            d.sub_categoria = editData.sub_categoria;
-            d.cat_principal = editData.cat_principal;
+        refreshData.forEach((d) => {
+          if (categoryData.id_categoria === d.id) {
+            d.id = categoryData.id;
+            d.categoria = categoryData.categoria;
+            d.cod_categoria = categoryData.cod_categoria;
+            d.descripcion = categoryData.descripcion;
+            d.sub_categoria = categoryData.sub_categoria;
+            d.cat_principal = categoryData.cat_principal;
           }
         });
         MySwal.fire({
@@ -158,48 +125,63 @@ const ListarCategorias = () => {
           timer: 2000,
           position: "top-end",
         });
-        abrirCerrarModalEditar();
+        handleOnCloseMainModalCategory();
       })
       .catch((err) => {});
-  };
-  const deleteElem = async (elemId) => {
-    await Axios.post(`http://localhost:8000/api/categoria/delete`, {
-      id: elemId,
-    })
+    } else {
+      Axios.post("http://localhost:8000/api/categoria/create", data)
       .then((res) => {
-        if (res.status === 200) {
-          MySwal.fire({
-            title: "Categoria eliminada correctamente",
-            icon: "success",
-            toast: true,
-            showConfirmButton: false,
-            timer: 2000,
-            position: "top-end",
-          });
-          setCategories(categories.filter((arg) => arg.id !== elemId));
-          abrirCerrarModalEliminar()
-        }
+        let refreshData = categories;
+        refreshData.forEach((d) => {
+          if (categoryData.id_categoria === d.id) {
+            d.id = categoryData.id;
+            d.categoria = categoryData.categoria;
+            d.cod_categoria = categoryData.cod_categoria;
+            d.descripcion = categoryData.descripcion;
+            d.sub_categoria = categoryData.sub_categoria;
+            d.cat_principal = categoryData.cat_principal;
+          }
+        });
+        MySwal.fire({
+          title: "Categoria actualizada correctamente",
+          icon: "success",
+          toast: true,
+          showConfirmButton: false,
+          timer: 2000,
+          position: "top-end",
+        });
+        handleOnCloseMainModalCategory();
       })
-      .catch((err) => {          MySwal.fire({
-        title: "Error al eliminar la categoria",
-        icon: "error",
-        toast: true,
-        showConfirmButton: false,
-        timer: 2000,
-        position: "top-end",
-      });});
+      .catch((err) => {});
+    }
   };
-  const handleOnSubmit = (e) => {
+
+  const handleOnOpenMainModalCategory = () => {
+    setMainModalCategoryOpen(true);
+  };
+
+  const handleOnCloseMainModalCategory = () => {
+    setMainModalCategoryOpen(false);
+    setCategoryData(initialCategoryData);
+  };
+
+  const handleOnSubmitMainModalCategory = (e) => {
     e.preventDefault();
-    sendData(editData);
+    sendData(categoryData);
   };
+
+  const handleOnChangeMainModalCategory = (e) => {
+    setCategoryData({
+      ...categoryData,
+      [e.target.name]: e.target.value,
+    })
+  };
+
 
   return (
     <CRow>
       <CCol className="mb-2 mb-xl-0 text-right">
-        <CButton onClick={() => abrirCerrarModalAgregar()} color="info">
-          Agregar
-        </CButton>
+        <CButton onClick={() => handleOnOpenMainModalCategory()} color="info">Agregar</CButton>
       </CCol>
       <CCol xs="12" className="mt-2">
         <CCard>
@@ -211,229 +193,18 @@ const ListarCategorias = () => {
           />
         </CCard>
       </CCol>
-      {/**Modal Agregar */}
-      <CModal
-        show={modalAgregar}
-        onClose={() => abrirCerrarModalAgregar()}
-        color="info"
-      >
-        <CModalHeader closeButton>
-          <CModalTitle>Agregar Categoria</CModalTitle>
-        </CModalHeader>
-        <CForm onSubmit={handleOnSubmit}>
-          <CModalBody>
-            <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="text-input">Codigo categoria</CLabel>
-              </CCol>
-              <CCol xs="12" md="8">
-                <CInput
-                  id="text-input"
-                  name="cod_categoria"
-                  placeholder="Text"
-                  onChange={handleOnChange}
-                  value={editData.cod_categoria}
-                />
-                <CFormText>This is a help text</CFormText>
-              </CCol>
-            </CFormGroup>
-            <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="text-input">Nombre de la categoria</CLabel>
-              </CCol>
-              <CCol xs="12" md="8">
-                <CInput
-                  id="text-input"
-                  name="categoria"
-                  placeholder="Text"
-                  onChange={handleOnChange}
-                  value={editData.categoria}
-                />
-                <CFormText>This is a help text</CFormText>
-              </CCol>
-            </CFormGroup>
-            <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="textarea-input">Descripción</CLabel>
-              </CCol>
-              <CCol xs="12" md="8">
-                <CTextarea
-                  name="descripcion"
-                  id="textarea-input"
-                  rows="3"
-                  placeholder="Content..."
-                  onChange={handleOnChange}
-                  value={editData.descripcion}
-                />
-              </CCol>
-            </CFormGroup>
-            <CFormGroup row>
-              <CCol tag="label" sm="4" className="col-form-label">
-                Añadir categoria padre
-              </CCol>
-              <CCol sm="8">
-                <CSwitch
-                  className="mr-1 mt-2"
-                  color="primary"
-                  name="sub_categoria"
-                  checked={editData.sub_categoria}
-                  onChange={() => {
-                    setEditData({
-                      ...editData,
-                      sub_categoria: !editData.sub_categoria,
-                    });
-                  }}
-                />
-              </CCol>
-            </CFormGroup>
-            {editData.sub_categoria ? (
-              <CFormGroup row>
-                <CCol md="4">
-                  <CLabel htmlFor="select">Categoria padre</CLabel>
-                </CCol>
-                <CCol xs="12" md="8">
-                  <CSelect
-                    custom
-                    name="cat_principal"
-                    id="select"
-                    onChange={handleOnChange}
-                    value={editData.cat_principal}
-                  >
-                    <option value="">Seleccione una categoria</option>
-                    {principalCategory.map((data) => {
-                      return (
-                        <option value={data.categoria}>{data.categoria}</option>
-                      );
-                    })}
-                  </CSelect>
-                </CCol>
-              </CFormGroup>
-            ) : null}
-          </CModalBody>
-          <CModalFooter>
-            <CButton
-              color="secondary"
-              onClick={() => abrirCerrarModalAgregar()}
-            >
-              Cancelar
-            </CButton>
-            <CButton type="submit" color="info">
-              Agregar
-            </CButton>{" "}
-          </CModalFooter>
-        </CForm>
-      </CModal>
-      {/**Modal Editar */}
-      <CModal
-        show={modalEditar}
-        onClose={() => abrirCerrarModalEditar()}
-        color="info"
-      >
-        <CModalHeader closeButton>
-          <CModalTitle>Editar Categoria</CModalTitle>
-        </CModalHeader>
-        <CForm onSubmit={handleOnSubmit}>
-          <CModalBody>
-            <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="text-input">Codigo categoria</CLabel>
-              </CCol>
-              <CCol xs="12" md="8">
-                <CInput
-                  id="text-input"
-                  name="cod_categoria"
-                  placeholder="Text"
-                  onChange={handleOnChange}
-                  value={editData.cod_categoria}
-                />
-                <CFormText>This is a help text</CFormText>
-              </CCol>
-            </CFormGroup>
-            <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="text-input">Nombre de la categoria</CLabel>
-              </CCol>
-              <CCol xs="12" md="8">
-                <CInput
-                  id="text-input"
-                  name="categoria"
-                  placeholder="Text"
-                  onChange={handleOnChange}
-                  value={editData.categoria}
-                />
-                <CFormText>This is a help text</CFormText>
-              </CCol>
-            </CFormGroup>
-            <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="textarea-input">Descripción</CLabel>
-              </CCol>
-              <CCol xs="12" md="8">
-                <CTextarea
-                  name="descripcion"
-                  id="textarea-input"
-                  rows="3"
-                  placeholder="Content..."
-                  onChange={handleOnChange}
-                  value={editData.descripcion}
-                />
-              </CCol>
-            </CFormGroup>
-            <CFormGroup row>
-              <CCol tag="label" sm="4" className="col-form-label">
-                Añadir categoria padre
-              </CCol>
-              <CCol sm="8">
-                <CSwitch
-                  className="mr-1 mt-2"
-                  color="primary"
-                  name="sub_categoria"
-                  checked={editData.sub_categoria}
-                  onChange={() => {
-                    setEditData({
-                      ...editData,
-                      sub_categoria: !editData.sub_categoria,
-                    });
-                  }}
-                />
-              </CCol>
-            </CFormGroup>
-            {editData.sub_categoria ? (
-              <CFormGroup row>
-                <CCol md="4">
-                  <CLabel htmlFor="select">Categoria padre</CLabel>
-                </CCol>
-                <CCol xs="12" md="8">
-                  <CSelect
-                    custom
-                    name="cat_principal"
-                    id="select"
-                    onChange={handleOnChange}
-                    value={editData.cat_principal}
-                  >
-                    <option value={"0"}>Seleccione una categoria</option>
-                    {principalCategory.map((data) => {
-                      return (
-                        <option value={parseInt(data.id)}>
-                          {data.categoria}
-                        </option>
-                      );
-                    })}
-                  </CSelect>
-                </CCol>
-              </CFormGroup>
-            ) : null}
-          </CModalBody>
-          <CModalFooter>
-            <CButton color="secondary" onClick={() => abrirCerrarModalEditar()}>
-              Cancelar
-            </CButton>
-            <CButton type="submit" color="info">
-              Editar
-            </CButton>{" "}
-          </CModalFooter>
-        </CForm>
-      </CModal>
+
+      {/** MainModalCategories */}
+      <MainModalCategories
+        open={mainModalCategoryOpen}
+        onClose={handleOnCloseMainModalCategory}
+        onChange={handleOnChangeMainModalCategory}
+        onSubmit={handleOnSubmitMainModalCategory}
+        categoryData={categoryData}
+        setCategoryData={setCategoryData}
+        principalCategory={principalCategory}
+      />
+      
       {/** Modal eliminar */}
       <CModal
         show={modalEliminar}
@@ -456,7 +227,10 @@ const ListarCategorias = () => {
           <CButton color="secondary" onClick={() => abrirCerrarModalEliminar()}>
             Cancelar
           </CButton>
-          <CButton onClick={() => deleteElem(deleteData.id)} color="info">Eliminar</CButton>{" "}
+          <CButton 
+            // onClick={() => deleteElem(deleteData.id)} 
+            color="info"
+          >Eliminar</CButton>{" "}
         </CModalFooter>
       </CModal>
     </CRow>

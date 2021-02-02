@@ -40,6 +40,10 @@ const User = React.lazy(() => import('./views/users/User'));
 /** Productos */
 const ListarProductos = React.lazy(() => import('./views/productos/ListarProductos'));
 const ListarCategorias = React.lazy(() => import('./views/productos/categorias/ListarCategorias'));
+const ListarMarcas = React.lazy(() => import('./views/productos/marcas/ListaMarcas'));
+const ListarUnidades = React.lazy(() => import('./views/productos/unidades/ListaUnidades'));
+const ListarVariaciones = React.lazy(() => import('./views/productos/variaciones/ListaVariaciones'));
+
 
 
 const routes = [
@@ -85,7 +89,10 @@ const routes = [
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   /** Modulo de categorias ruta */
   { path: '/productos', exact: true, name: 'Productos', component: ListarProductos },
-  { path: '/productos/categorias', exact: true,  name: 'Categorias', component: ListarCategorias }
+  { path: '/productos/categorias', exact: true,  name: 'Categorias', component: ListarCategorias },
+  { path: '/productos/marcas', exact: true,  name: 'Marcas', component: ListarMarcas },
+  { path: '/productos/unidades', exact: true,  name: 'Unidades', component: ListarUnidades },
+  { path: '/productos/variaciones', exact: true,  name: 'Variaciones', component: ListarVariaciones },
 ];
 
 export default routes;
