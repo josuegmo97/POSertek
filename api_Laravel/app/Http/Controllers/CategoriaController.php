@@ -163,3 +163,11 @@ class CategoriaController extends Controller
         );
     }
 }
+
+/*
+sudo update-alternatives --set php /usr/bin/php7.3 
+sudo update-alternatives --set phar /usr/bin/phar7.3 
+sudo update-alternatives --set phar.phar /usr/bin/phar.phar7.3
+
+Te pienso todos los dias sin falta. Quiero que sepas que en el fondo te quiero muchisimo, es algo que solo yo entiendo y entendere. Y no, no estoy bien pero voy poco a poco..!!
+*/
